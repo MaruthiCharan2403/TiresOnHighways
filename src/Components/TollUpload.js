@@ -112,7 +112,7 @@ export default function TollUpload(props) {
 
       async function call_express(requestData) {
         try {
-          await axios.post('https://tohexpress.onrender.com/tollupload', requestData, {
+          await axios.post('https://tires-on-highways-navy.vercel.app/tollupload', requestData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },

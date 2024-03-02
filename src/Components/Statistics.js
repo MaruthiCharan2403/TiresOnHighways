@@ -9,7 +9,7 @@ export default function Statistics(props) {
   async function getStats() {
 
     try {
-      const response = await axios.get(`https://tohexpress.onrender.com/stats`);
+      const response = await axios.get(`https://tires-on-highways-navy.vercel.app/stats`);
       setStats(response.data);
     } catch (err) {
       console.log(err);

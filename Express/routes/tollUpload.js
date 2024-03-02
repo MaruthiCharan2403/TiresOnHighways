@@ -12,7 +12,7 @@ const twilio = require('twilio');
 
 // ^ CORS 
 router.use(cors({
-    origin: 'https://tiresonhighways.vercel.app',
+    origin: 'https://frontend-black-eight.vercel.app',
     credentials: true,
 }));
 

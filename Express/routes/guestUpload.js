@@ -5,7 +5,7 @@ const blobUtil = require('blob-util');
 const axios = require('axios');
 const cors = require('cors');
 router.use(cors({
-    origin: 'https://tiresonhighways.vercel.app',
+    origin: 'https://frontend-black-eight.vercel.app/',
     credentials: true,
 }));
 

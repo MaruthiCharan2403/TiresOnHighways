@@ -61,7 +61,7 @@ export default function GuestUpload(props) {
 
             async function makeReq(formData) {
                 try {
-                    const response = await axios.post(`https://tohexpress.onrender.com/guestUp`, formData)
+                    const response = await axios.post(`https://tires-on-highways-navy.vercel.app/guestUp`, formData)
                     console.log(response.data);
                     setLoader(false);
                     setRes(true);

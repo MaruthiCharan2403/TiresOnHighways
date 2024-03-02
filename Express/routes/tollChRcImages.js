@@ -5,7 +5,7 @@ const auth = require('../middleware/tollAuth');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 router.use(cors({
-    origin: 'https://tiresonhighways.vercel.app',
+    origin: 'https://frontend-black-eight.vercel.app/',
     credentials: true,
 }));
 router.use(cookieParser());

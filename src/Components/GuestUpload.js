@@ -61,7 +61,7 @@ export default function GuestUpload(props) {
 
             async function makeReq(formData) {
                 try {
-                    const response = await axios.post(`http://${window.location.hostname}:4000/guestUp`, formData)
+                    const response = await axios.post(`https://tohexpress.onrender.com/guestUp`, formData)
                     console.log(response.data);
                     setLoader(false);
                     setRes(true);

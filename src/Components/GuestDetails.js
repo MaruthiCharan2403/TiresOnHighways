@@ -1,142 +1,3 @@
-// import axios from 'axios';
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import Loader from './Loader';
-
-// export default function GuestDetails(props) {
-//     props.setSignInButton(true);
-//     const [statusArray, setStatusArray] = useState([]);
-//     const [base64Array, setBase64Array] = useState([]);
-//     const [NoData, setNoData] = useState(false);
-//     const [vno, setVNo] = useState('');
-//     const [phoneNo, setPhoneNo] = useState('');
-//     const [tollPlaza, setTollPlaza] = useState('');
-//     const [date, setDate] = useState('');
-//     const [res, setRes] = useState(false);
-//     const [loader, setLoader] = useState(false);
-
-//     const handleVnoChange = (event) => {
-//         setVNo(event.target.value);
-//         setPhoneNo('');
-//         setRes(false);
-//         setLoader(false);
-//         setNoData(false);
-//         setStatusArray([]);
-//         setBase64Array([]);
-//     }
-
-//     const handleSubmit = async (e) => {
-//         setStatusArray([]);
-//         setBase64Array([]);
-//         setLoader(true);
-//         setNoData(false);
-//         setRes(false);
-//         e.preventDefault();
-//         const response = await axios.get(`http://${window.location.hostname}:4000/guestDet`, {
-//             params: {
-//                 vehicleNumber: vno,
-//             },
-//         });
-//         if (response.data === "No Data Found") {
-//             console.log("No Data Found");
-//             setRes(false);
-//             setLoader(false);
-//             console.log(response.data)
-//             setNoData(response.data);
-//         }
-//         else {
-
-//             console.log(response.data)
-
-
-//             setPhoneNo(response.data.userMobileNumber);
-//             setTollPlaza(response.data.tollPlaza);
-//             setDate(response.data.date);
-//             for (let i = 0; i < response.data.tyreStatus.length; i++) {
-//                 setStatusArray(s => [...s, response.data.tyreStatus[i]]);
-
-//             }
-//             for (let i = 0; i < response.data.userTyre64.length; i++) {
-//                 setBase64Array(b => [...b, "data:image/jpeg;base64," + response.data.userTyre64[i]]);
-
-//             }
-
-//             setLoader(false)
-//             setRes(true);
-//         }
-//     }
-
-//     return (
-
-//         <div className="parenth ">
-//             <div className='GuestDetails container  rounded-4 p-4 bg-black  border border-3 border-white mt-5' style={{ maxWidth: "600px" }} >
-//                 <div className='row'>
-//                     <form onSubmit={handleSubmit}>
-//                         <div className='col'>
-//                             <h1 style={{ color: 'white' }}>Check Your Vehicle Details</h1>
-//                         </div>
-//                         <div className="col">
-//                             <input type="text" onChange={handleVnoChange} className="form-control border border-black" placeholder='VehivleNumber' name="VehicleNumber" id="vehicleU" required />
-//                         </div>
-//                         <div className="row">
-//                             <div className="col-sm-3 mt-2">
-//                                 <Link to="/guest" className="btn btn-warning back" id="blackbut">Go Back</Link>
-//                             </div>
-//                             {res && <div className="col-sm-3 mt-2">
-//                                 <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#backdrop" >Result</button>
-//                                 <div className="modal fade" id="backdrop" tabIndex="-1" aria-labelledby="backdropLabel" aria-hidden="true">
-//                                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-//                                         <div className="modal-content">
-//                                             <div className="modal-header">
-//                                                 <h5 className="modal-title" id="backdropLabel">Result</h5>
-//                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-//                                             </div>
-//                                             <div className="modal-body">
-//                                                 <div className=''>
-//                                                 <p >Vehicle Number: {vno} </p>
-//                                                 <p >Mobile Number: {phoneNo} </p>
-//                                                 <p >Toll Plaza: {tollPlaza} </p>
-//                                                 <p >Date: {date} </p>
-//                                                 <hr/>
-//                                                 </div>
-//                                                 <p>Image(s)</p>
-//                                                 {statusArray.map((item, index) => (
-//                                                     <div className='row text-center mb-4 mt-4'>
-//                                                         <div id="getImg" className='mb-3' >
-//                                                             <img className="enlarge" style={{ width: '200px', height: 'auto', borderRadius: '10px', transition: 'width 0.3s ease' }} // Shrink on mouse out
-//                                                                 src={base64Array[index]} alt="Vehicle Tire" />
-//                                                         </div>
-                                                        
-//                                                         <p >Classification : {item.class} </p>
-//                                                         <p >Confidence : {item.confidence} </p>
-//                                                         <hr />
-//                                                         <br />
-//                                                     </div>))}
-//                                             </div>
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                             </div>}
-//                             {NoData && <div className="col-sm-3 mt-2 me-1">
-//                                 <p class="btn btn-danger">NotFound</p>
-//                             </div>}
-//                             <div className="col-sm-3 mt-2">
-//                                 <button type="submit" className="btn btn-primary detSub">Submit</button>
-//                             </div>
-//                         </div>
-//                         {loader && <Loader />}
-
-//                     </form>
-//                 </div>
-
-//             </div>
-//         </div>
-
-//     );
-// }
-
-
-
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -166,18 +27,18 @@ export default function GuestDetails(props) {
     }
     function base64ArrayToBlobArray(base64Array, contentType) {
         return base64Array.map(base64String => {
-          const byteCharacters = atob(base64String);
-          const byteNumbers = new Array(byteCharacters.length);
-    
-          for (let i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
-          }
-    
-          const byteArray = new Uint8Array(byteNumbers);
-          return new Blob([byteArray], { type: contentType });
+            const byteCharacters = atob(base64String);
+            const byteNumbers = new Array(byteCharacters.length);
+
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            return new Blob([byteArray], { type: contentType });
         });
-      }
-    
+    }
+
 
     const handleSubmit = async (e) => {
         setStatusArray([]);
@@ -186,7 +47,7 @@ export default function GuestDetails(props) {
         setNoData(false);
         setRes(false);
         e.preventDefault();
-        const response = await axios.get(`http://${window.location.hostname}:4000/guestDet`, {
+        const response = await axios.get(`https://tohexpress.onrender.com/guestDet`, {
             params: {
                 vehicleNumber: vno,
             },
@@ -212,7 +73,7 @@ export default function GuestDetails(props) {
             }
             const contentType = "image/jpeg"; // Set the appropriate content type
             const convertedBlobArray = base64ArrayToBlobArray(response.data.userTyre64, contentType);
-            for(let i = 0 ; i < convertedBlobArray.length ; i++){
+            for (let i = 0; i < convertedBlobArray.length; i++) {
                 setBlobArray(s => [...s, convertedBlobArray[i]]);
             }
 
@@ -249,11 +110,11 @@ export default function GuestDetails(props) {
                                             </div>
                                             <div className="modal-body">
                                                 <div className=''>
-                                                <p >Vehicle Number: {vno} </p>
-                                                <p >Mobile Number: {phoneNo} </p>
-                                                <p >Toll Plaza: {tollPlaza} </p>
-                                                <p >Date: {date} </p>
-                                                <hr/>
+                                                    <p >Vehicle Number: {vno} </p>
+                                                    <p >Mobile Number: {phoneNo} </p>
+                                                    <p >Toll Plaza: {tollPlaza} </p>
+                                                    <p >Date: {date} </p>
+                                                    <hr />
                                                 </div>
                                                 <p>Image(s)</p>
                                                 {statusArray.map((item, index) => (
@@ -262,7 +123,7 @@ export default function GuestDetails(props) {
                                                             <img className="enlarge" style={{ width: '200px', height: 'auto', borderRadius: '10px', transition: 'width 0.3s ease' }} // Shrink on mouse out
                                                                 src={URL.createObjectURL(blobArray[index])} alt="Vehicle Tire" />
                                                         </div>
-                                                        
+
                                                         <p >Classification : {item.class} </p>
                                                         <p >Confidence : {item.confidence} </p>
                                                         <hr />

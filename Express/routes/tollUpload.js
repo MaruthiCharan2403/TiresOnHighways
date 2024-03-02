@@ -8,7 +8,7 @@ const axios = require('axios');
 const blobUtil = require('blob-util');
 const cookieparser = require('cookie-parser')
 router.use(cookieparser());
-// const twilio = require('twilio');
+const twilio = require('twilio');
 
 // ^ CORS 
 router.use(cors({
@@ -22,6 +22,7 @@ const Tollupload = multer({ storage: TollUp, limits: { fieldSize: 25 * 1024 * 10
 
 //! TollUpload Route
 router.post('/tollupload',auth,Tollupload.any(), async (req, res) => {
+    let msg = '';
     console.log("TollUpload Route");
     const { vehicleNumber, userMobileNumber, date, tollPlaza } = req.body;
     const tollBlobArray = [];
@@ -59,24 +60,13 @@ router.post('/tollupload',auth,Tollupload.any(), async (req, res) => {
                 tyreStatus: tollFlaskResponse,
                 tollPlaza: tollPlaza,
             });
-            // try {
-            //     const accountSid = 'AC47aad9efb59c476057c03e1e8b2ebace';
-            //     const authToken = 'a8ff2103eb0f7ad7b4322374a1ea126e';
-            //     const client = twilio(accountSid, authToken);
-            //     client.messages
-            //         .create({
-            //             from: '+13344543086',
-            //             to: '+91' + userMobileNumber,
-            //             body: `Your vehicle with number ${vehicleNumber} has a ${tollFlaskResponse} tyre.`,
-            //         })
-            //         .then(message => console.log(message.sid))
-            //         .done();
-            // } catch (err) {
-            //     console.log('SMS NOT SENT');
-            // }
+            for(let i=0;i<tollFlaskResponse.length;i++){
+                msg = msg + `Tire${i+1} is ${tollFlaskResponse[i].class}\n`;
+            }
+            console.log(msg);
+            
             await tollData.save();
             console.log('Data saved to MongoDB');
-            // res.send(Data saved to MongoDB: ${JSON.stringify(tollData, null, 2)});
             res.send("Data saved to MongoDB");
         } catch (err) {
             console.error('Error saving data to MongoDB:', err);
@@ -84,8 +74,24 @@ router.post('/tollupload',auth,Tollupload.any(), async (req, res) => {
         }
     } catch (error) {
         console.error("Error sending file to flask_api :", error);
-        return res.status(500).send('Error sending file to flask_api');
+        res.status(500).send('Error sending file to flask_api');
     }
+    const accountSid = `${process.env.TWILIO_ACCOUNT_SID}`; // Your Account SID from www.twilio.com/console
+        const authToken = `${process.env.TWILIO_AUTH_TOKEN}`;   // Your Auth Token from www.twilio.com/console
+        const client = twilio(accountSid, authToken);
+        try {
+        const responseSMS = await client.messages
+            .create({
+                from: '+13344543086',
+                to: '+91' + userMobileNumber,
+                body: `Your vehicle  ${vehicleNumber} has crossed ${tollPlaza} on ${date}\n${msg}`,
+            })
+        console.log(responseSMS.sid);
+            
+    } catch (err) {
+        console.log('SMS NOT SENT');
+    }
+    return;
 });
 
 module.exports = router;

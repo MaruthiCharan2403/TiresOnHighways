@@ -38,9 +38,9 @@ router.post('/login', Tollupload.any(), async (req, res) => {
             try {
               const token = createToken(user._id);
               // console.log(token);
-              res.cookie('tollLogin', token, { domain: 'https://tiresonhighways.vercel.app', maxAge: 60 * 60 * 1000 });
+              res.cookie('tollLogin', token, { domain: 'https://tiresonhighways.vercel.app', maxAge: 60 * 60 * 1000 ,path: '/', sameSite: 'None', secure: true});
               // sameSite: 'None'  -> for CORS purposes and controlling the cookie to be sent only to the same origin
-              // secure : true -> is not recommended for development purposes as we can't access a cookie using document.cookie in the client side 
+              // httpOnly : true -> is not recommended for development purposes as we can't access a cookie using document.cookie in the client side 
               // path: '/' -> to make the cookie available to all the routes
               // domain: `http://${req.hostname}:3000`} -> to make the cookie available to all the subdomains
               console.log("Success");

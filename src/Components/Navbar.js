@@ -10,7 +10,7 @@ export default function Navbar({ signInButton, setCookie }) {
   }
   const handleLogOut = async (e) => {
     e.preventDefault()
-    const response = await axios.get(`http://${window.location.hostname}:4000/logout`, { withCredentials: true })
+    const response = await axios.get(`https://tohexpress.onrender.com/logout`, { withCredentials: true })
     if (response.data) {
       setCookie(null)
       setModal(false);

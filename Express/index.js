@@ -17,7 +17,7 @@ const port = 4000;
 
 // ^ CORS 
 app.use(cors({
-  origin: 'https://tiresonhighways.vercel.app',
+  origin: 'https://frontend-black-eight.vercel.app',
   credentials: true,
 }));
 

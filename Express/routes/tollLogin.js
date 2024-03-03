@@ -10,7 +10,7 @@ const cors = require('cors');
 
 // ^ CORS 
 router.use(cors({
-    origin: 'https://frontend-black-eight.vercel.app',
+    // origin: 'https://frontend-black-eight.vercel.app',
     credentials: true,
   }));
 

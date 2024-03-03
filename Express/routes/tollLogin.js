@@ -9,12 +9,7 @@ const cors = require('cors');
 
 
 // ^ CORS 
-router.use(cors({
-    origin: 'https://frontend-black-eight.vercel.app',
-    credentials: true,
-  }));
 
-router.use(cookieParser());
 
 // & Multer config for TollUpload
 const TollUp = multer.memoryStorage();
@@ -23,6 +18,13 @@ const Tollupload = multer({ storage: TollUp, limits: { fieldSize: 25 * 1024 * 10
 // & JWT
 const createToken = (id) => {
     return jwt.sign({ id }, 'TiresOnHighway', { expiresIn: 60 * 60 * 1000 });}
+
+router.use(cors({
+    origin: 'https://frontend-black-eight.vercel.app',
+    credentials: true,
+  }));
+
+router.use(cookieParser());
 
 // ! Login Route
 router.post('/login', Tollupload.any(), async (req, res) => {

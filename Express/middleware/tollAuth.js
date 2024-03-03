@@ -4,7 +4,7 @@ const router = require('express').Router();
 router.use(cookieparser());
 const cors = require('cors');
 router.use(cors({
-    origin: 'https://tiresonhighways.vercel.app',
+    // origin: 'https://tiresonhighways.vercel.app',
     credentials: true,
 }));
 const auth = async (req, res, next) => {

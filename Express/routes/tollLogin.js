@@ -28,7 +28,7 @@ router.use(cookieParser());
 
 // ! Login Route
 router.post('/login', Tollupload.any(), async (req, res) => {
-    // res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const { toll, password } = req.body;
     try {
       const user = await TollPlaza.findOne({ username: toll });

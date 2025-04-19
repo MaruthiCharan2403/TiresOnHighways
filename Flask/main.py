@@ -8,7 +8,8 @@ from PIL import Image
 
 app = Flask(__name__)
 CORS(app)
-model = keras.models.load_model('best_model.h5')
+model = keras.models.load_model('best_model.h5', compile=False)
+
 
 def preprocess_image(file):
     img = image.img_to_array(Image.open(file).convert('RGB').resize((64, 64)))

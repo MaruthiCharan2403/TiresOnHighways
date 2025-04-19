@@ -3,7 +3,7 @@ const router = express.Router();
 const TollData = require('../models/TollDataSch');
 const cors = require('cors');
 router.use(cors({
-    origin: 'https://frontend-black-eight.vercel.app',
+    origin: '*',
     credentials: true,
 }));
 

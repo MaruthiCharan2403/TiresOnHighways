@@ -47,7 +47,7 @@ export default function GuestDetails(props) {
         setNoData(false);
         setRes(false);
         e.preventDefault();
-        const response = await axios.get(`https://tires-on-highways-navy.vercel.app/guestDet`, {
+        const response = await axios.get(`http://localhost:4000/guestDet`, {
             params: {
                 vehicleNumber: vno,
             },

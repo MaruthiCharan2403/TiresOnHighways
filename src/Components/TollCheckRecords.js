@@ -29,7 +29,7 @@ export default function CheckRecords(props) {
     setLoader(true);
     e.preventDefault();
     try {
-      const response = await axios.get(`https://tires-on-highways-navy.vercel.app/checkRecords`, {
+      const response = await axios.get(`http://localhost:4000/checkRecords`, {
         params: {
           date: dateSub,
           tollPlaza: props.selectedToll,

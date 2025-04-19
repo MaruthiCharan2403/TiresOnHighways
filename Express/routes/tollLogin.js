@@ -20,7 +20,7 @@ const createToken = (id) => {
     return jwt.sign({ id }, 'TiresOnHighway', { expiresIn: 60 * 60 * 1000 });}
 
 router.use(cors({
-    origin: 'https://frontend-black-eight.vercel.app',
+    origin: '*',
     credentials: true,
   }));
 

@@ -6,7 +6,7 @@ const auth = require('../middleware/tollAuth');
 
 // ^ CORS 
 router.use(cors({
-    origin: 'https://frontend-black-eight.vercel.app',
+    origin: '*',
     credentials: true,
 }));
 

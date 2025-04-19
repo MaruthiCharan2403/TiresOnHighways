@@ -17,7 +17,7 @@ const port = 4000;
 
 // ^ CORS 
 app.use(cors({
-  origin: 'https://frontend-black-eight.vercel.app',
+  origin: '*',
   credentials: true,
 }));
 

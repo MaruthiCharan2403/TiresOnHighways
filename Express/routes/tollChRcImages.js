@@ -5,7 +5,7 @@ const auth = require('../middleware/tollAuth');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 router.use(cors({
-    origin: 'https://frontend-black-eight.vercel.app',
+    origin: '*',
     credentials: true,
 }));
 router.use(cookieParser());
